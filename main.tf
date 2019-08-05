@@ -79,3 +79,9 @@ resource "google_compute_firewall" "default_allow_ssh" {
   source_ranges = ["0.0.0.0/0"]
   priority      = 65534
 }
+
+resource "google_project_service" "main" {
+  project            = var.project
+  service            = "cloudresourcemanager.googleapis.com"
+  disable_on_destroy = var.disable_crm_api_on_destroy
+}

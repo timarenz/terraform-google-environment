@@ -2,16 +2,6 @@ variable "environment_name" {
   type = string
 }
 
-variable "owner_name" {
-  type    = string
-  default = null
-}
-
-variable "ttl" {
-  type    = number
-  default = 48
-}
-
 variable "project" {
   type = string
 }
@@ -42,4 +32,9 @@ variable "subnets" {
       prefix = "192.168.42.0/24"
     },
   ]
+}
+
+variable "disable_crm_api_on_destroy" {
+  type    = bool
+  default = false
 }
