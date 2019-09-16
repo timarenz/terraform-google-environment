@@ -7,26 +7,9 @@ variable "project" {
   type        = string
 }
 
-# variable "use_existing_project" {
-#   description = "If enabled, specify the project of the existing project in the name variable."
-#   type        = bool
-#   default     = false
-# }
-
 variable "region" {
-  type    = string
-  default = "europe-west4"
+  type = string
 }
-
-# variable "org_id" {
-#   type    = string
-#   default = null
-# }
-
-# variable "billing_account" {
-#   type    = string
-#   default = null
-# }
 
 variable "cidr_block" {
   type    = string

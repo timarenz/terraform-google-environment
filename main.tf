@@ -1,41 +1,12 @@
-# resource "random_string" "random" {
-#   length  = 4
-#   special = false
-#   upper   = false
-# }
-
-# resource "google_project" "main" {
-#   count           = var.use_existing_project ? 0 : 1
-#   name            = "${var.project}-${random_string.random.result}"
-#   project_id      = "${var.project}-${random_string.random.result}"
-#   org_id          = var.org_id
-#   billing_account = var.billing_account
-# }
-
-data "google_project" "main" {
-  project_id = var.project
-}
-
 resource "google_compute_network" "main" {
   name                    = "${var.environment_name}-network"
   auto_create_subnetworks = false
 }
 
-locals {
-  # project = element(
-  #   concat(
-  #     data.google_project.main[*].project_id,
-  #     google_project.main[*].project_id,
-  #   ),
-  #   0,
-  # )
-  project = data.google_project.main.project_id
-}
-
 resource "google_compute_subnetwork" "main" {
   count         = length(var.subnets)
   name          = "${var.environment_name}-${lookup(var.subnets[count.index], "name")}"
-  project       = local.project
+  project       = var.project
   region        = var.region
   ip_cidr_range = lookup(var.subnets[count.index], "prefix")
   network       = "${google_compute_network.main.self_link}"
@@ -105,7 +76,7 @@ resource "google_compute_firewall" "default_allow_ssh" {
 }
 
 resource "google_project_service" "main" {
-  project            = local.project
+  project            = var.project
   service            = "cloudresourcemanager.googleapis.com"
   disable_on_destroy = var.disable_crm_api_on_destroy
 }
