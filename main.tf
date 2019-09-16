@@ -1,5 +1,6 @@
 resource "google_compute_network" "main" {
   name                    = "${var.environment_name}-network"
+  project                 = var.project
   auto_create_subnetworks = false
 }
 
