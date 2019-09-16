@@ -15,6 +15,7 @@ resource "google_compute_subnetwork" "main" {
 
 resource "google_compute_firewall" "default_allow_icmp" {
   name    = "${var.environment_name}-allow-icmp"
+  project = var.project
   network = google_compute_network.main.self_link
 
   allow {
@@ -27,6 +28,7 @@ resource "google_compute_firewall" "default_allow_icmp" {
 
 resource "google_compute_firewall" "default_allow_internal" {
   name    = "${var.environment_name}-allow-internal"
+  project = var.project
   network = google_compute_network.main.self_link
 
   allow {
@@ -52,6 +54,7 @@ resource "google_compute_firewall" "default_allow_internal" {
 
 resource "google_compute_firewall" "default_allow_rdp" {
   name    = "${var.environment_name}-allow-rdp"
+  project = var.project
   network = google_compute_network.main.self_link
 
   allow {
@@ -65,6 +68,7 @@ resource "google_compute_firewall" "default_allow_rdp" {
 
 resource "google_compute_firewall" "default_allow_ssh" {
   name    = "${var.environment_name}-allow-ssh"
+  project = var.project
   network = google_compute_network.main.self_link
 
   allow {
