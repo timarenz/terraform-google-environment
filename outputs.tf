@@ -1,14 +1,6 @@
 output "project_id" {
-  value = local.project
+  value = var.project
 }
-
-# output "org_id" {
-#   value = google_project.main[0].org_id
-# }
-
-# output "billing_account" {
-#   value = google_project.main[0].billing_account
-# }
 
 output "region" {
   value = var.region
