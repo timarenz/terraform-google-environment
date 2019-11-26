@@ -10,7 +10,7 @@ resource "google_compute_subnetwork" "main" {
   project       = var.project
   region        = var.region
   ip_cidr_range = lookup(var.subnets[count.index], "prefix")
-  network       = "${google_compute_network.main.self_link}"
+  network       = google_compute_network.main.self_link
 }
 
 resource "google_compute_firewall" "default_allow_icmp" {
